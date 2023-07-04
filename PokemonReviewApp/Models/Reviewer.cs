@@ -6,5 +6,6 @@
         private string FirstName { get; set; }
         private string LastName { get; set; }
 
+        public ICollection<Review> Reviews { get; set;}
     }
 }

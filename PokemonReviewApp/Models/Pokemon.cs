@@ -5,6 +5,7 @@
         private int Id {  get; set; }
         private string Name { get; set; }
         private DateTime BirthDate { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
     }
 }
