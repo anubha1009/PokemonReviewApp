@@ -14,6 +14,31 @@ namespace PokemonReviewApp.Data
         public DbSet<PokemonCategory> PokemonCategories { get; set; }
         public DbSet<PokemonOwner> PokemonOwners { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Reviewer> Reviewers { get; set; }  
+        public DbSet<Reviewer> Reviewers { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PokemonCategory>()
+                .HasKey(pc => new { pc.PokemonId, pc.CategoryId }); //asking entity framework to link these two ids
+            modelBuilder.Entity<PokemonCategory>()
+                .HasOne(p => p.Pokemon)
+                .WithMany(pc => pc.PokemonCategories)
+                .HasForeignKey(c => c.CategoryId);
+            modelBuilder.Entity<PokemonCategory>()
+                .HasOne(p =>p.Category)
+                .WithMany(pc => pc.PokemonCategories)
+                .HasForeignKey(c=> c.CategoryId);
+
+            modelBuilder.Entity<PokemonOwner>()
+                .HasKey(po => new { po.PokemonId, po.OwnerId });
+            modelBuilder.Entity<PokemonOwner>()
+                .HasOne(p =>p.Pokemon)
+                .WithMany(po=> po.PokemonOwners)
+                .HasForeignKey(o => o.OwnerId);
+            modelBuilder.Entity<PokemonOwner>()
+                .HasOne(o => o.Owner)
+                .WithMany(po => po.PokemonOwners)
+                .HasForeignKey(p => p.PokemonId);
+        
+        }
     }
 }
