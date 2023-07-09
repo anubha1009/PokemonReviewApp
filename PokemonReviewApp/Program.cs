@@ -18,6 +18,9 @@ builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
 //Injecting data at the start of the app
 builder.Services.AddTransient<Seed>();
 
+//Add automapper wiring here
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 //establishing a connection using connnection string 
 builder.Services.AddDbContext<DataContext>(options =>
 {
