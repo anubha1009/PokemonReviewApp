@@ -8,7 +8,10 @@ namespace PokemonReviewApp.Helper
     {
         public MapplingProfiles()
         {
-               CreateMap<Pokemon , PokemonDto>();
+            CreateMap<Pokemon, PokemonDto>();
+            CreateMap<Category,  CategoryDto>();
+            CreateMap<Country, CountryDto>();
+            CreateMap<Owner ,  OwnerDto>();
         }
     }
 }
